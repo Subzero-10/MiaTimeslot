@@ -3,6 +3,7 @@ package com.example.miatimeslot;
 import net.time4j.*;
 import net.time4j.format.expert.ChronoFormatter;
 import net.time4j.format.expert.PatternType;
+import net.time4j.tz.TZID;
 import net.time4j.tz.olson.*;
 
 import java.util.Locale;
@@ -14,121 +15,57 @@ public class timeZone {
 
     Moment nowTime = SystemClock.currentMoment();
 
-    void testTime()
+    String testTime()
     {
         System.out.println(
                 "!!!!!!!!!!!!!!test-Time: "
-                        + SystemClock.inZonalView(AMERICA.SAO_PAULO).now().until(SystemClock.inZonalView(ASIA.SHANGHAI).now(),HOURS)
+                        + SystemClock.inZonalView(AMERICA.SAO_PAULO).now()
         );//负数再减一
+        return SystemClock.inZonalView(AMERICA.SAO_PAULO).now().toString();
     }
 
-    void brTime()
+    String brTime()
     {
-        System.out.println(
-                "巴西 巴西利亚: "
-                        + ChronoFormatter.ofMomentPattern(
-                        "uuuu-MM-dd'T'HH:mm:ssXX",
-                        PatternType.CLDR,
-                        Locale.ROOT,
-                        AMERICA.SAO_PAULO
-                ).format(nowTime)
-        );
+        return "巴西 巴西利亚: "+string2builder(AMERICA.SAO_PAULO);
     }
-    void mxTime()
+    String mxTime()
     {
-        System.out.println(
-                "墨西哥 墨西哥城: "
-                        + ChronoFormatter.ofMomentPattern(
-                        "uuuu-MM-dd'T'HH:mm:ssXX",
-                        PatternType.CLDR,
-                        Locale.ROOT,
-                        AMERICA.MEXICO_CITY
-                ).format(nowTime)
-        );
+        return "墨西哥 墨西哥城: "+string2builder(AMERICA.MEXICO_CITY);
     }
-    void clTime()
+    String clTime()
     {
-        System.out.println(
-                "智利 圣地亚哥: "
-                        + ChronoFormatter.ofMomentPattern(
-                        "uuuu-MM-dd'T'HH:mm:ssXX",
-                        PatternType.CLDR,
-                        Locale.ROOT,
-                        AMERICA.SANTIAGO
-                ).format(nowTime)
-        );
+        return "智利 圣地亚哥: "+string2builder(AMERICA.SANTIAGO);
     }
-    void useTime()
+    String useTime()
     {
-        System.out.println(
-                "美东 纽约: "
-                        + ChronoFormatter.ofMomentPattern(
-                        "uuuu-MM-dd'T'HH:mm:ssXX",
-                        PatternType.CLDR,
-                        Locale.ROOT,
-                        AMERICA.NEW_YORK
-                ).format(nowTime)
-        );
+        return "美东 纽约: "+string2builder(AMERICA.NEW_YORK);
     }
-    void uswTime()
+    String uswTime()
     {
-        System.out.println(
-                "美西 洛杉矶: "
-                        + ChronoFormatter.ofMomentPattern(
-                        "uuuu-MM-dd'T'HH:mm:ssXX",
-                        PatternType.CLDR,
-                        Locale.ROOT,
-                        AMERICA.LOS_ANGELES
-                ).format(nowTime)
-        );
+        return "美西 洛杉矶: "+string2builder(AMERICA.LOS_ANGELES);
     }
-    void nzTime()
+    String nzTime()
     {
-        System.out.println(
-                "新西兰 奥克兰: "
-                        + ChronoFormatter.ofMomentPattern(
-                        "uuuu-MM-dd'T'HH:mm:ssXX",
-                        PatternType.CLDR,
-                        Locale.ROOT,
-                        PACIFIC.AUCKLAND
-                ).format(nowTime)
-        );
+        return "新西兰 奥克兰: "+string2builder(PACIFIC.AUCKLAND);
     }
-    void auTime()
+    String auTime()
     {
-        System.out.println(
-                "澳大利亚 墨尔本: "
-                        + ChronoFormatter.ofMomentPattern(
-                        "uuuu-MM-dd'T'HH:mm:ssXX",
-                        PatternType.CLDR,
-                        Locale.ROOT,
-                        AUSTRALIA.MELBOURNE
-                ).format(nowTime)
-        );
+        return "澳大利亚 墨尔本: "+string2builder(AUSTRALIA.MELBOURNE);
     }
-    void ruTime()
+    String ruTime()
     {
-        System.out.println(
-                "俄罗斯 莫斯科: "
-                        + ChronoFormatter.ofMomentPattern(
-                        "uuuu-MM-dd'T'HH:mm:ssXX",
-                        PatternType.CLDR,
-                        Locale.ROOT,
-                        EUROPE.MOSCOW
-                ).format(nowTime)
-        );
+        return "俄罗斯 莫斯科: "+string2builder(EUROPE.MOSCOW);
     }
-    void cnTime()
+    String cnTime()
     {
-        System.out.println(
-                "中国 北京: "
-                        + ChronoFormatter.ofMomentPattern(
-                        "uuuu-MM-dd'T'HH:mm:ssXX",
-                        PatternType.CLDR,
-                        Locale.ROOT,
-                        ASIA.SHANGHAI
-                ).format(nowTime)
-        );
+        return "中国 北京: "+string2builder(ASIA.SHANGHAI);
+    }
+    private StringBuilder string2builder(TZID tzid)
+    {
+        StringBuilder time = new StringBuilder(SystemClock.inZonalView(tzid).now().toString());
+        time.setCharAt(10,' ');
+        time.delete(18,22);
+        return time;
     }
 
 }
