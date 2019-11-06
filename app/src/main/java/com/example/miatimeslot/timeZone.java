@@ -1,13 +1,13 @@
 package com.example.miatimeslot;
 
 import net.time4j.*;
-import net.time4j.format.TextWidth;
 import net.time4j.format.expert.ChronoFormatter;
 import net.time4j.format.expert.PatternType;
 import net.time4j.tz.olson.*;
 
-import java.util.Calendar;
 import java.util.Locale;
+
+import static net.time4j.ClockUnit.HOURS;
 
 public class timeZone {
     //获取系统的日期
@@ -18,13 +18,8 @@ public class timeZone {
     {
         System.out.println(
                 "!!!!!!!!!!!!!!test-Time: "
-                        + ChronoFormatter.ofMomentPattern(
-                        "uuuu-MM-dd'T'HH:mm:ssXX",
-                        PatternType.CLDR,
-                        Locale.ROOT,
-                        AMERICA.SAO_PAULO
-                ).format(nowTime)
-        );
+                        + SystemClock.inZonalView(AMERICA.SAO_PAULO).now().until(SystemClock.inZonalView(ASIA.SHANGHAI).now(),HOURS)
+        );//负数再减一
     }
 
     void brTime()
