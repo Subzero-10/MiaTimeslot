@@ -2,7 +2,9 @@ package com.example.miatimeslot;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView textView9 ;
     Button button;
     timeSlot b;
+    String str;
+    Intent intent;
 
 
     @Override
@@ -47,6 +51,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button = (Button)findViewById(R.id.button);
         b = new timeSlot();
         button.setOnClickListener(this);
+        textView2.setOnClickListener(this);
+        textView3.setOnClickListener(this);
+        textView4.setOnClickListener(this);
+        textView5.setOnClickListener(this);
+        textView6.setOnClickListener(this);
+        textView7.setOnClickListener(this);
+        textView8.setOnClickListener(this);
+        textView9.setOnClickListener(this);
+        intent=new Intent(MainActivity.this, selectActivity.class);
 
     }
 
@@ -54,39 +67,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onStart() {
 
         super.onStart();
-        a.testTime();
-        a.uswTime();
-        a.useTime();
-        a.ruTime();
-        a.nzTime();
-        a.mxTime();
-        a.cnTime();
-        a.clTime();
-        a.brTime();
-        a.auTime();
-        timeSlot b = new timeSlot();
         updatetime();
     }
 
     void updatetime()
     {
-        SpannableStringBuilder builder = new SpannableStringBuilder(a.cnTime());
+        SpannableStringBuilder builder = new SpannableStringBuilder(Html.fromHtml(a.cnTime()));
         textView.setText(builder);
-        builder = new SpannableStringBuilder(a.uswTime()+"\n"+b.searchTimeSlot(AMERICA.LOS_ANGELES));
+        builder = new SpannableStringBuilder(Html.fromHtml("<p>"+a.uswTime()+"<br>"+b.searchTimeSlot(AMERICA.LOS_ANGELES)));
         textView2.setText(builder);
-        builder = new SpannableStringBuilder(a.useTime()+"\n"+b.searchTimeSlot(AMERICA.NEW_YORK));
+        builder = new SpannableStringBuilder(Html.fromHtml("<p>"+a.useTime()+"<br>"+b.searchTimeSlot(AMERICA.NEW_YORK)));
         textView3.setText(builder);
-        builder = new SpannableStringBuilder(a.ruTime()+"\n"+b.searchTimeSlot(EUROPE.MOSCOW));
+        builder = new SpannableStringBuilder(Html.fromHtml("<p>"+a.ruTime()+"<br>"+b.searchTimeSlot(EUROPE.MOSCOW)));
         textView4.setText(builder);
-        builder = new SpannableStringBuilder(a.nzTime()+"\n"+b.searchTimeSlot(PACIFIC.AUCKLAND));
+        builder = new SpannableStringBuilder(Html.fromHtml("<p>"+a.nzTime()+"<br>"+b.searchTimeSlot(PACIFIC.AUCKLAND)));
         textView5.setText(builder);
-        builder = new SpannableStringBuilder(a.mxTime()+"\n"+b.searchTimeSlot(AMERICA.MEXICO_CITY));
+        builder = new SpannableStringBuilder(Html.fromHtml("<p>"+a.mxTime()+"<br>"+b.searchTimeSlot(AMERICA.MEXICO_CITY)));
         textView6.setText(builder);
-        builder = new SpannableStringBuilder(a.clTime()+"\n"+b.searchTimeSlot(AMERICA.SANTIAGO));
+        builder = new SpannableStringBuilder(Html.fromHtml("<p>"+a.clTime()+"<br>"+b.searchTimeSlot(AMERICA.SANTIAGO)));
         textView7.setText(builder);
-        builder = new SpannableStringBuilder(a.brTime()+"\n"+b.searchTimeSlot(AMERICA.SAO_PAULO));
+        builder = new SpannableStringBuilder(Html.fromHtml("<p>"+a.brTime()+"<br>"+b.searchTimeSlot(AMERICA.SAO_PAULO)));
         textView8.setText(builder);
-        builder = new SpannableStringBuilder(a.auTime()+"\n"+b.searchTimeSlot(AUSTRALIA.MELBOURNE));
+        builder = new SpannableStringBuilder(Html.fromHtml("<p>"+a.auTime()+"<br>"+b.searchTimeSlot(AUSTRALIA.MELBOURNE)));
         textView9.setText(builder);
     }
 
@@ -94,6 +96,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.textView2:
+                str = "usw";
+                intent.putExtra("timezone",str);
+                startActivity(intent);
+                break;
+            case R.id.textView3:
+                str = "use";
+                intent.putExtra("timezone",str);
+                startActivity(intent);
+                break;
+            case R.id.textView4:
+                str = "ru";
+                intent.putExtra("timezone",str);
+                startActivity(intent);
+                break;
+            case R.id.textView5:
+                str = "nz";
+                intent.putExtra("timezone",str);
+                startActivity(intent);
+                break;
+            case R.id.textView6:
+                str = "mx";
+                intent.putExtra("timezone",str);
+                startActivity(intent);
+                break;
+            case R.id.textView7:
+                str = "cl";
+                intent.putExtra("timezone",str);
+                startActivity(intent);
+                break;
+            case R.id.textView8:
+                str = "br";
+                intent.putExtra("timezone",str);
+                startActivity(intent);
+                break;
+            case R.id.textView9:
+                str = "au";
+                intent.putExtra("timezone",str);
+                startActivity(intent);
+                break;
             case R.id.button:
                 Toast.makeText(MainActivity.this, "刷新时间",Toast.LENGTH_LONG).show();
                 updatetime();
